@@ -149,34 +149,22 @@
         <div class="contact-cards">
           <a href="https://line.me/ti/p/RHBbfJNVzK" target="_blank" rel="noopener noreferrer" class="contact-card">
             <div class="contact-icon">&#x1F4AC;</div>
-            <div class="contact-info">
-              <h3>Line</h3>
-              <p>Chat via Line</p>
-            </div>
+            <div class="contact-info"><h3>Line</h3><p>Chat via Line</p></div>
             <span class="contact-arrow">&rarr;</span>
           </a>
           <a href="https://www.instagram.com/ai.inoon?igsh=MTB2OWM1ODc1ZHlv" target="_blank" rel="noopener noreferrer" class="contact-card">
             <div class="contact-icon">&#x1F4F8;</div>
-            <div class="contact-info">
-              <h3>Instagram</h3>
-              <p>@ai.inoon</p>
-            </div>
+            <div class="contact-info"><h3>Instagram</h3><p>@ai.inoon</p></div>
             <span class="contact-arrow">&rarr;</span>
           </a>
-          <a href="/cdn-cgi/l/email-protection#ff889286cecccfcecebf98929e9693d19c9092" class="contact-card">
+          <a href="mailto:wmy13011@gmail.com" class="contact-card">
             <div class="contact-icon">&#x1F4E7;</div>
-            <div class="contact-info">
-              <h3>Email</h3>
-              <p><span class="__cf_email__" data-cfemail="21564c58101211101061464c40484d0f424e4c">[email&#160;protected]</span></p>
-            </div>
+            <div class="contact-info"><h3>Email</h3><p>wmy13011@gmail.com</p></div>
             <span class="contact-arrow">&rarr;</span>
           </a>
           <a href="https://wa.me/660800106530" target="_blank" rel="noopener noreferrer" class="contact-card">
             <div class="contact-icon">&#x1F4F1;</div>
-            <div class="contact-info">
-              <h3>WhatsApp</h3>
-              <p>+66 0800106530</p>
-            </div>
+            <div class="contact-info"><h3>WhatsApp</h3><p>+66 0800106530</p></div>
             <span class="contact-arrow">&rarr;</span>
           </a>
         </div>
@@ -202,8 +190,16 @@
       </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
       const hamburger = document.querySelector(".hamburger");
       const navMenu = document.querySelector(".nav-menu");
       hamburger.addEventListener("click", () => {
         navMenu.classList.toggle("open");
+        hamburger.classList.toggle("active");
+      });
+      window.addEventListener("scroll", () => {
+        document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 50);
+      });
+    </script>
+  </body>
+</html>
