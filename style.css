@@ -628,10 +628,10 @@ img {
   background: url("cerita-cinta.jpeg") center/cover no-repeat;
 }
 .img-2 {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: url('musik-thailand.jpeg') center/cover no-repeat;
 }
 .img-3 {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: url('nature-gallery.jpeg') center/cover no-repeat;
 }
 
 .project-info {
