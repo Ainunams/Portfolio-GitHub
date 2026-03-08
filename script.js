@@ -23,7 +23,6 @@ window.addEventListener("scroll", () => {
    ========================================= */
 const themeBtn = document.querySelector(".theme-toggle");
 
-// โหลด theme ที่บันทึกไว้ (ถ้ามี)
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "light") {
   document.body.classList.add("light-mode");
@@ -38,13 +37,12 @@ themeBtn.addEventListener("click", () => {
 
 /* =========================================
    3. COUNTER ANIMATION
-   เมื่อ scroll ถึง skills section จะนับตัวเลขขึ้น
    ========================================= */
 const counters = document.querySelectorAll(".counter-num");
 
 const animateCounter = (el) => {
   const target = parseInt(el.getAttribute("data-target"), 10);
-  const duration = 1500; // ms
+  const duration = 1500;
   const step = target / (duration / 16);
   let current = 0;
 
@@ -60,13 +58,12 @@ const animateCounter = (el) => {
   update();
 };
 
-// ใช้ IntersectionObserver เพื่อ trigger เมื่อ element อยู่ใน viewport
 const counterObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         animateCounter(entry.target);
-        counterObserver.unobserve(entry.target); // นับแค่ครั้งเดียว
+        counterObserver.unobserve(entry.target);
       }
     });
   },
@@ -76,10 +73,7 @@ const counterObserver = new IntersectionObserver(
 counters.forEach((counter) => counterObserver.observe(counter));
 
 /* =========================================
-   4. SMOOTH SCROLL (Custom — ควบคุมได้เอง)
-   =========================================
-   หมายเหตุ: css scroll-behavior: smooth ทำ smooth scroll อยู่แล้ว
-   แต่โจทย์ต้องการ JS version — ทำด้วย addEventListener แทน onclick
+   4. SMOOTH SCROLL
    ========================================= */
 const allNavLinks = document.querySelectorAll('a[href^="#"]');
 
@@ -93,22 +87,18 @@ allNavLinks.forEach((link) => {
 
     e.preventDefault();
 
-    // ปิด mobile menu ถ้าเปิดอยู่
     navMenu.classList.remove("open");
     hamburger.classList.remove("active");
 
     const navHeight = document.querySelector(".navbar").offsetHeight;
     const targetTop = targetEl.getBoundingClientRect().top + window.scrollY - navHeight - 16;
 
-    window.scrollTo({
-      top: targetTop,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
   });
 });
 
 /* =========================================
-   5. PROJECT CARD CLICK — ใช้ addEventListener แทน onclick=""
+   5. PROJECT CARD CLICK
    ========================================= */
 const projectCards = document.querySelectorAll(".project-card[data-url]");
 
@@ -119,8 +109,7 @@ projectCards.forEach((card) => {
 });
 
 /* =========================================
-   6. SCROLL REVEAL (BONUS)
-   Card และ section จะ fade-in เมื่อ scroll ถึง
+   6. SCROLL REVEAL
    ========================================= */
 const revealEls = document.querySelectorAll(".skill-card, .project-card, .contact-card, .stat-card");
 
@@ -140,3 +129,104 @@ revealEls.forEach((el) => {
   el.classList.add("reveal-hidden");
   revealObserver.observe(el);
 });
+
+/* =========================================
+   7. STICKY NAVBAR — Active Link Highlight
+   ไฮไลท์เมนูที่ตรงกับ section ที่กำลัง scroll อยู่
+   ========================================= */
+const sections = document.querySelectorAll("section[id]");
+const navMenuLinks = document.querySelectorAll(".nav-menu a");
+
+const highlightActiveNav = () => {
+  const scrollY = window.scrollY;
+  const navHeight = document.querySelector(".navbar").offsetHeight;
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - navHeight - 40;
+    const sectionBottom = sectionTop + section.offsetHeight;
+
+    if (scrollY >= sectionTop && scrollY < sectionBottom) {
+      navMenuLinks.forEach((link) => {
+        link.classList.remove("nav-active");
+        if (link.getAttribute("href") === `#${section.id}`) {
+          link.classList.add("nav-active");
+        }
+      });
+    }
+  });
+};
+
+window.addEventListener("scroll", highlightActiveNav);
+highlightActiveNav();
+
+/* =========================================
+   8. VALIDASI FORM
+   ========================================= */
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+  const nameInput = document.querySelector("#form-name");
+  const emailInput = document.querySelector("#form-email");
+  const messageInput = document.querySelector("#form-message");
+  const formSuccess = document.querySelector(".form-success");
+  const formError = document.querySelector(".form-error");
+
+  const showError = (input, msg) => {
+    const group = input.closest(".form-group");
+    const existing = group.querySelector(".field-error");
+    if (existing) existing.remove();
+    input.classList.add("input-error");
+    const errEl = document.createElement("span");
+    errEl.className = "field-error";
+    errEl.textContent = msg;
+    group.appendChild(errEl);
+  };
+
+  const clearError = (input) => {
+    const group = input.closest(".form-group");
+    const existing = group.querySelector(".field-error");
+    if (existing) existing.remove();
+    input.classList.remove("input-error");
+  };
+
+  const isValidEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  [nameInput, emailInput, messageInput].forEach((input) => {
+    input.addEventListener("input", () => clearError(input));
+  });
+
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    if (nameInput.value.trim().length < 2) {
+      showError(nameInput, "Nama minimal 2 karakter.");
+      isValid = false;
+    }
+
+    if (!isValidEmail(emailInput.value)) {
+      showError(emailInput, "Format email tidak valid.");
+      isValid = false;
+    }
+
+    if (messageInput.value.trim().length < 10) {
+      showError(messageInput, "Pesan minimal 10 karakter.");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      if (formError) {
+        formError.style.display = "block";
+        setTimeout(() => (formError.style.display = "none"), 3000);
+      }
+      return;
+    }
+
+    contactForm.reset();
+    if (formSuccess) {
+      formSuccess.style.display = "block";
+      setTimeout(() => (formSuccess.style.display = "none"), 4000);
+    }
+  });
+}

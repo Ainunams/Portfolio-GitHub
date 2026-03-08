@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 
-    <!-- ✅ CSS สำหรับฟีเจอร์ JS ใหม่ (Dark/Light Mode, Counter, Reveal) -->
     <style>
       /* --- Dark / Light Mode --- */
       body.light-mode {
@@ -25,11 +24,45 @@
       body.light-mode .navbar.scrolled {
         background: rgba(244, 243, 255, 0.88);
       }
-      body.light-mode .hero-bg .grid-overlay {
-        opacity: 0.5;
+
+      /* แก้ navbar ตอนไม่ scroll */
+      body.light-mode .navbar {
+        background: rgba(244, 243, 255, 0.75);
+        backdrop-filter: blur(12px);
       }
 
-      /* --- Theme Toggle Button --- */
+      /* แก้ mobile nav menu dropdown */
+      body.light-mode .nav-menu {
+        background: rgba(244, 243, 255, 0.98) !important;
+        border-bottom-color: rgba(124, 92, 252, 0.15);
+      }
+
+      /* แก้ footer — ให้เข้ากับ light mode */
+      body.light-mode .footer {
+        background: linear-gradient(135deg, #ede9ff 0%, #f0eeff 100%) !important;
+        border-top: 1px solid rgba(124, 92, 252, 0.2) !important;
+        box-shadow: 0 -4px 24px rgba(124, 92, 252, 0.06);
+      }
+      body.light-mode .footer .nav-logo {
+        color: #1a1030;
+      }
+      body.light-mode .footer-brand p,
+      body.light-mode .footer-nav a,
+      body.light-mode .footer-copy p {
+        color: #6b5fa6;
+      }
+      body.light-mode .footer-nav a:hover {
+        color: #1a1030;
+        background: rgba(124, 92, 252, 0.1);
+      }
+
+      /* blob ใน hero จางลงในโหมดสว่าง */
+      body.light-mode .blob-1,
+      body.light-mode .blob-2 {
+        opacity: 0.1;
+      }
+
+      /* --- Theme Toggle --- */
       .theme-toggle {
         background: var(--bg-card);
         border: 1px solid var(--border);
@@ -46,15 +79,31 @@
         box-shadow: 0 0 12px var(--accent-glow);
       }
 
-      /* --- Stats / Counter Section --- */
+      /* =========================================
+         7. STICKY NAVBAR — Active Link Style
+         ========================================= */
+      .nav-menu a.nav-active {
+        color: var(--accent) !important;
+        background: rgba(124, 92, 252, 0.12) !important;
+        font-weight: 600;
+        position: relative;
+      }
+      .nav-menu a.nav-active::after {
+        content: "";
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 18px;
+        height: 2px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      /* --- Stats / Counter --- */
       .stats {
         padding: 60px 32px;
-        background: linear-gradient(
-          180deg,
-          transparent 0%,
-          rgba(124, 92, 252, 0.04) 50%,
-          transparent 100%
-        );
+        background: linear-gradient(180deg, transparent 0%, rgba(124, 92, 252, 0.04) 50%, transparent 100%);
       }
       .stats-inner {
         max-width: 900px;
@@ -74,10 +123,7 @@
         text-align: center;
         transition: transform 0.25s, box-shadow 0.25s;
       }
-      .stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-glow);
-      }
+      .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-glow); }
       .stat-number {
         font-family: var(--font-display);
         font-size: 2.8rem;
@@ -89,26 +135,113 @@
         line-height: 1;
         margin-bottom: 8px;
       }
-      .stat-label {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        font-weight: 500;
-      }
+      .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
 
-      /* --- Scroll Reveal Animation --- */
-      .reveal-hidden {
-        opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.55s ease, transform 0.55s ease;
+      /* --- Scroll Reveal --- */
+      .reveal-hidden { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+      .reveal-hidden.revealed { opacity: 1; transform: translateY(0); }
+
+      /* =========================================
+         8. VALIDASI FORM — Contact Form Styles
+         ========================================= */
+      .contact-form-section {
+        margin-top: 48px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius);
+        padding: 36px 32px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
       }
-      .reveal-hidden.revealed {
-        opacity: 1;
-        transform: translateY(0);
+      .contact-form-section h3 {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+      }
+      .contact-form { display: flex; flex-direction: column; gap: 18px; }
+      .form-group { display: flex; flex-direction: column; gap: 6px; }
+      .form-group label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .form-group input,
+      .form-group textarea {
+        background: var(--bg);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        padding: 12px 16px;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        resize: none;
+        width: 100%;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.15);
+      }
+      /* Error state */
+      .form-group input.input-error,
+      .form-group textarea.input-error {
+        border-color: #fc5c7d;
+        box-shadow: 0 0 0 3px rgba(252, 92, 125, 0.15);
+      }
+      .field-error {
+        font-size: 0.8rem;
+        color: #fc5c7d;
+        margin-top: 2px;
+      }
+      /* Success / Error banner */
+      .form-success, .form-error {
+        display: none;
+        text-align: center;
+        font-size: 0.9rem;
+        border-radius: var(--radius-sm);
+        padding: 12px;
+      }
+      .form-success {
+        color: #6ee7b7;
+        background: rgba(110, 231, 183, 0.08);
+        border: 1px solid rgba(110, 231, 183, 0.25);
+      }
+      .form-error {
+        color: #fc5c7d;
+        background: rgba(252, 92, 125, 0.08);
+        border: 1px solid rgba(252, 92, 125, 0.25);
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, var(--accent), #5e3de0);
+        color: #fff;
+        border: none;
+        border-radius: 100px;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 14px 32px;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 24px rgba(124, 92, 252, 0.4);
+        letter-spacing: 0.01em;
+      }
+      .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124, 92, 252, 0.55); }
+
+      @media (max-width: 480px) {
+        .contact-form-section { padding: 24px 18px; }
       }
     </style>
   </head>
   <body>
-    <!-- ===== NAVBAR (Flexbox #1) ===== -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
       <div class="nav-inner">
         <a href="#" class="nav-logo">Ainun<span class="dot">.</span></a>
@@ -118,7 +251,6 @@
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <!-- ✅ ปุ่ม Dark/Light Mode Toggle — ใช้ addEventListener ใน script.js -->
         <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
         <a href="#contact" class="btn-cta">Hire Me</a>
         <button class="hamburger" aria-label="Toggle menu">
@@ -127,7 +259,7 @@
       </div>
     </nav>
 
-    <!-- ===== HERO SECTION (Flexbox #2) ===== -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="home">
       <div class="hero-bg">
         <div class="blob blob-1"></div>
@@ -145,7 +277,6 @@
             untuk mengembangkan sistem yang dapat digunakan jauh di masa depan.
           </p>
           <div class="hero-buttons">
-            <!-- ✅ ใช้ href="#portfolio" — smooth scroll จัดการด้วย JS ใน script.js -->
             <a href="#portfolio" class="btn btn-primary">Lihat Portfolio</a>
             <a href="#contact" class="btn btn-ghost">Hubungi saya &rarr;</a>
           </div>
@@ -157,38 +288,29 @@
       </div>
     </section>
 
-    <!-- ===== STATS / COUNTER SECTION ===== -->
-    <!-- ✅ ฟีเจอร์ JS #2: Counter Animation — นับตัวเลขขึ้นเมื่อ scroll มาถึง -->
+    <!-- ===== STATS / COUNTER ===== -->
     <section class="stats">
       <div class="stats-inner">
         <div class="stat-card">
-          <div class="stat-number">
-            <span class="counter-num" data-target="3">0</span>+
-          </div>
+          <div class="stat-number"><span class="counter-num" data-target="3">0</span>+</div>
           <div class="stat-label">Proyek Selesai</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">
-            <span class="counter-num" data-target="6">0</span>
-          </div>
+          <div class="stat-number"><span class="counter-num" data-target="6">0</span></div>
           <div class="stat-label">Skill Dikuasai</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">
-            <span class="counter-num" data-target="2">0</span>
-          </div>
+          <div class="stat-number"><span class="counter-num" data-target="2">0</span></div>
           <div class="stat-label">Tahun Belajar</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">
-            <span class="counter-num" data-target="100">0</span>%
-          </div>
+          <div class="stat-number"><span class="counter-num" data-target="100">0</span>%</div>
           <div class="stat-label">Semangat Belajar</div>
         </div>
       </div>
     </section>
 
-    <!-- ===== SKILLS SECTION (CSS Grid) ===== -->
+    <!-- ===== SKILLS ===== -->
     <section class="skills" id="about">
       <div class="skills-inner">
         <div class="section-header">
@@ -236,13 +358,12 @@
       </div>
     </section>
 
-    <!-- ===== PORTFOLIO SECTION ===== -->
+    <!-- ===== PORTFOLIO ===== -->
     <section class="portfolio" id="portfolio">
       <div class="portfolio-inner">
         <div class="section-header">
           <h2 class="section-title">Portfolio</h2>
         </div>
-        <!-- ✅ ลบ onclick="" ออกแล้ว — ใช้ data-url + addEventListener ใน script.js -->
         <div class="portfolio-grid">
           <div class="project-card project-large" data-url="https://ainunams.github.io/Cerita-Cinta/" style="cursor:pointer;">
             <div class="project-img img-1"></div>
@@ -272,13 +393,15 @@
       </div>
     </section>
 
-    <!-- ===== CONTACT SECTION ===== -->
+    <!-- ===== CONTACT ===== -->
     <section class="contact" id="contact">
       <div class="contact-inner">
         <div class="section-header">
           <h2 class="section-title">Mari Terhubung!</h2>
           <p class="section-sub">Jangan ragu untuk menghubungi saya melalui saluran berikut.</p>
         </div>
+
+        <!-- Social Links -->
         <div class="contact-cards">
           <a href="https://line.me/ti/p/RHBbfJNVzK" target="_blank" rel="noopener noreferrer" class="contact-card">
             <div class="contact-icon">&#x1F4AC;</div>
@@ -301,10 +424,33 @@
             <span class="contact-arrow">&rarr;</span>
           </a>
         </div>
+
+        <!-- ✅ ฟีเจอร์ #8: Contact Form with Validasi -->
+        <div class="contact-form-section">
+          <h3>&#x2709;&#xFE0F; Kirim Pesan Langsung</h3>
+          <form class="contact-form" novalidate>
+            <div class="form-group">
+              <label for="form-name">Nama Lengkap</label>
+              <input type="text" id="form-name" placeholder="Masukkan nama kamu..." autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <label for="form-email">Alamat Email</label>
+              <input type="email" id="form-email" placeholder="contoh@email.com" autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <label for="form-message">Pesan</label>
+              <textarea id="form-message" rows="4" placeholder="Tulis pesanmu di sini..."></textarea>
+            </div>
+            <div class="form-success">&#x2705; Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.</div>
+            <div class="form-error">&#x274C; Ada kesalahan. Silakan periksa kembali form di atas.</div>
+            <button type="submit" class="btn-submit">Kirim Pesan &#x1F4E8;</button>
+          </form>
+        </div>
+
       </div>
     </section>
 
-    <!-- ===== FOOTER (Flexbox #3) ===== -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer" id="footer">
       <div class="footer-inner">
         <div class="footer-brand">
@@ -323,7 +469,6 @@
       </div>
     </footer>
 
-    <!-- ✅ แยกไฟล์ JS ออกมาเป็น script.js — ไม่มี inline script ใน HTML -->
     <script src="script.js"></script>
   </body>
 </html>
