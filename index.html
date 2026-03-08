@@ -8,6 +8,104 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+
+    <!-- ✅ CSS สำหรับฟีเจอร์ JS ใหม่ (Dark/Light Mode, Counter, Reveal) -->
+    <style>
+      /* --- Dark / Light Mode --- */
+      body.light-mode {
+        --bg: #f4f3ff;
+        --bg-card: #ffffff;
+        --bg-card-hover: #ede9ff;
+        --text: #1a1030;
+        --text-muted: #6b5fa6;
+        --border: rgba(124, 92, 252, 0.3);
+        --border-subtle: rgba(124, 92, 252, 0.12);
+        --shadow-card: 0 4px 32px rgba(124, 92, 252, 0.1);
+      }
+      body.light-mode .navbar.scrolled {
+        background: rgba(244, 243, 255, 0.88);
+      }
+      body.light-mode .hero-bg .grid-overlay {
+        opacity: 0.5;
+      }
+
+      /* --- Theme Toggle Button --- */
+      .theme-toggle {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        padding: 7px 13px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        flex-shrink: 0;
+        color: var(--text);
+      }
+      .theme-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 12px var(--accent-glow);
+      }
+
+      /* --- Stats / Counter Section --- */
+      .stats {
+        padding: 60px 32px;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(124, 92, 252, 0.04) 50%,
+          transparent 100%
+        );
+      }
+      .stats-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .stat-card {
+        flex: 1;
+        min-width: 160px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius);
+        padding: 32px 24px;
+        text-align: center;
+        transition: transform 0.25s, box-shadow 0.25s;
+      }
+      .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-glow);
+      }
+      .stat-number {
+        font-family: var(--font-display);
+        font-size: 2.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      /* --- Scroll Reveal Animation --- */
+      .reveal-hidden {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
+      }
+      .reveal-hidden.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
   </head>
   <body>
     <!-- ===== NAVBAR (Flexbox #1) ===== -->
@@ -20,6 +118,8 @@
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <!-- ✅ ปุ่ม Dark/Light Mode Toggle — ใช้ addEventListener ใน script.js -->
+        <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
         <a href="#contact" class="btn-cta">Hire Me</a>
         <button class="hamburger" aria-label="Toggle menu">
           <span></span><span></span><span></span>
@@ -45,6 +145,7 @@
             untuk mengembangkan sistem yang dapat digunakan jauh di masa depan.
           </p>
           <div class="hero-buttons">
+            <!-- ✅ ใช้ href="#portfolio" — smooth scroll จัดการด้วย JS ใน script.js -->
             <a href="#portfolio" class="btn btn-primary">Lihat Portfolio</a>
             <a href="#contact" class="btn btn-ghost">Hubungi saya &rarr;</a>
           </div>
@@ -52,6 +153,37 @@
         <div class="hero-image-wrap">
           <div class="hero-image-ring"></div>
           <img src="profile.png" alt="Ai Aminsen" class="hero-image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS / COUNTER SECTION ===== -->
+    <!-- ✅ ฟีเจอร์ JS #2: Counter Animation — นับตัวเลขขึ้นเมื่อ scroll มาถึง -->
+    <section class="stats">
+      <div class="stats-inner">
+        <div class="stat-card">
+          <div class="stat-number">
+            <span class="counter-num" data-target="3">0</span>+
+          </div>
+          <div class="stat-label">Proyek Selesai</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">
+            <span class="counter-num" data-target="6">0</span>
+          </div>
+          <div class="stat-label">Skill Dikuasai</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">
+            <span class="counter-num" data-target="2">0</span>
+          </div>
+          <div class="stat-label">Tahun Belajar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">
+            <span class="counter-num" data-target="100">0</span>%
+          </div>
+          <div class="stat-label">Semangat Belajar</div>
         </div>
       </div>
     </section>
@@ -110,8 +242,9 @@
         <div class="section-header">
           <h2 class="section-title">Portfolio</h2>
         </div>
+        <!-- ✅ ลบ onclick="" ออกแล้ว — ใช้ data-url + addEventListener ใน script.js -->
         <div class="portfolio-grid">
-          <div class="project-card project-large" onclick="window.open('https://ainunams.github.io/Cerita-Cinta/', '_blank')" style="cursor:pointer;">
+          <div class="project-card project-large" data-url="https://ainunams.github.io/Cerita-Cinta/" style="cursor:pointer;">
             <div class="project-img img-1"></div>
             <div class="project-info">
               <span class="project-tag">Clone website</span>
@@ -119,7 +252,7 @@
               <p>Membuat website tentang orang yang cinta.</p>
             </div>
           </div>
-          <div class="project-card" onclick="window.open('https://ainunams.github.io/Music-App/', '_blank')" style="cursor:pointer;">
+          <div class="project-card" data-url="https://ainunams.github.io/Music-App/" style="cursor:pointer;">
             <div class="project-img img-2"></div>
             <div class="project-info">
               <span class="project-tag">Aplikasi</span>
@@ -127,7 +260,7 @@
               <p>Lagu-lagu dengan lirik yang bermakna ada di sini.</p>
             </div>
           </div>
-          <div class="project-card" onclick="window.open('https://ainunams.github.io/Gallery/', '_blank')" style="cursor:pointer;">
+          <div class="project-card" data-url="https://ainunams.github.io/Gallery/" style="cursor:pointer;">
             <div class="project-img img-3"></div>
             <div class="project-info">
               <span class="project-tag">Gallery</span>
@@ -190,16 +323,7 @@
       </div>
     </footer>
 
-    <script>
-      const hamburger = document.querySelector(".hamburger");
-      const navMenu = document.querySelector(".nav-menu");
-      hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("open");
-        hamburger.classList.toggle("active");
-      });
-      window.addEventListener("scroll", () => {
-        document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 50);
-      });
-    </script>
+    <!-- ✅ แยกไฟล์ JS ออกมาเป็น script.js — ไม่มี inline script ใน HTML -->
+    <script src="script.js"></script>
   </body>
 </html>
