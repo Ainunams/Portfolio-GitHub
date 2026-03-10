@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ai Aminsen — Porfolio GitHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== NAVBAR (Flexbox #1) ===== -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">Ainun<span class="dot">.</span></a>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn-cta">Hire Me</a>
+        <button class="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== HERO SECTION (Flexbox #2) ===== -->
+    <section class="hero" id="home">
+      <div class="hero-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Hi , Saya <span class="highlight">Ai Aminsen</span><br />
+            Pengalaman Digital
+          </h1>
+          <p class="hero-desc">
+            Mahasiswa internasional yang mempelajari sistem informasi bertujuan
+            untuk mengembangkan sistem yang dapat digunakan jauh di masa depan.
+          </p>
+          <div class="hero-buttons">
+            <a href="#portfolio" class="btn btn-primary">Lihat Portfolio</a>
+            <a href="#contact" class="btn btn-ghost">Hubungi saya &rarr;</a>
+          </div>
+        </div>
+        <div class="hero-image-wrap">
+          <div class="hero-image-ring"></div>
+          <img src="profile.png" alt="Ai Aminsen" class="hero-image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS SECTION (CSS Grid) ===== -->
+    <section class="skills" id="about">
+      <div class="skills-inner">
+        <div class="section-header">
+          <h2 class="section-title">Keterampilan &amp; keahlian saya</h2>
+          <p class="section-sub">Teknologi dan alat yang saya gunakan untuk mewujudkan ide.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="card-icon">&#x26A1;</div>
+            <h3>JavaScript</h3>
+            <p>DOM manipulation, Fetch API, dan logika interaktif modern.</p>
+            <div class="card-tags"><span>ES6+</span><span>Fetch API</span><span>DOM</span></div>
+          </div>
+          <div class="skill-card">
+            <div class="card-icon">&#x1F3A8;</div>
+            <h3>CSS3</h3>
+            <p>Flexbox, Grid, animasi, dan responsive design untuk semua layar.</p>
+            <div class="card-tags"><span>Flexbox</span><span>Grid</span><span>Animation</span></div>
+          </div>
+          <div class="skill-card">
+            <div class="card-icon">&#x1F4C3;</div>
+            <h3>HTML5</h3>
+            <p>Semantic markup, aksesibilitas, dan struktur dokumen yang baik.</p>
+            <div class="card-tags"><span>Semantic</span><span>Accessibility</span><span>SEO</span></div>
+          </div>
+          <div class="skill-card">
+            <div class="card-icon">&#x1F517;</div>
+            <h3>Git &amp; GitHub</h3>
+            <p>Version control, branching, dan kolaborasi tim secara profesional.</p>
+            <div class="card-tags"><span>Git</span><span>GitHub</span><span>Branching</span></div>
+          </div>
+          <div class="skill-card">
+            <div class="card-icon">&#x2699;</div>
+            <h3>React</h3>
+            <p>Component-based development dengan hooks dan state management.</p>
+            <div class="card-tags"><span>Hooks</span><span>Components</span><span>State</span></div>
+          </div>
+          <div class="skill-card">
+            <div class="card-icon">&#x1F680;</div>
+            <h3>Performance</h3>
+            <p>Optimasi loading, image compression, dan Core Web Vitals.</p>
+            <div class="card-tags"><span>Web Vitals</span><span>Lazy Load</span><span>Optimization</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PORTFOLIO SECTION ===== -->
+    <section class="portfolio" id="portfolio">
+      <div class="portfolio-inner">
+        <div class="section-header">
+          <h2 class="section-title">Portfolio</h2>
+        </div>
+        <div class="portfolio-grid">
+          <div class="project-card project-large" onclick="window.open('https://ainunams.github.io/Cerita-Cinta/', '_blank')" style="cursor:pointer;">
+            <div class="project-img img-1"></div>
+            <div class="project-info">
+              <span class="project-tag">Clone website</span>
+              <h3>&#x1F497; Cerita Cinta</h3>
+              <p>Membuat website tentang orang yang cinta.</p>
+            </div>
+          </div>
+          <div class="project-card" onclick="window.open('https://ainunams.github.io/Music-App/', '_blank')" style="cursor:pointer;">
+            <div class="project-img img-2"></div>
+            <div class="project-info">
+              <span class="project-tag">Aplikasi</span>
+              <h3>&#x1F3A7; Musik Thailand</h3>
+              <p>Lagu-lagu dengan lirik yang bermakna ada di sini.</p>
+            </div>
+          </div>
+          <div class="project-card" onclick="window.open('https://ainunams.github.io/Gallery/', '_blank')" style="cursor:pointer;">
+            <div class="project-img img-3"></div>
+            <div class="project-info">
+              <span class="project-tag">Gallery</span>
+              <h3>&#x1F338; Nature Gallery</h3>
+              <p>Jelajahi keindahan alam melalui koleksi foto bunga, hutan, dan langit dalam desain galeri pastel yang estetik.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact" id="contact">
+      <div class="contact-inner">
+        <div class="section-header">
+          <h2 class="section-title">Mari Terhubung!</h2>
+          <p class="section-sub">Jangan ragu untuk menghubungi saya melalui saluran berikut.</p>
+        </div>
+        <div class="contact-cards">
+          <a href="https://line.me/ti/p/RHBbfJNVzK" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <div class="contact-icon">&#x1F4AC;</div>
+            <div class="contact-info"><h3>Line</h3><p>Chat via Line</p></div>
+            <span class="contact-arrow">&rarr;</span>
+          </a>
+          <a href="https://www.instagram.com/ai.inoon?igsh=MTB2OWM1ODc1ZHlv" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <div class="contact-icon">&#x1F4F8;</div>
+            <div class="contact-info"><h3>Instagram</h3><p>@ai.inoon</p></div>
+            <span class="contact-arrow">&rarr;</span>
+          </a>
+          <a href="mailto:wmy13011@gmail.com" class="contact-card">
+            <div class="contact-icon">&#x1F4E7;</div>
+            <div class="contact-info"><h3>Email</h3><p>wmy13011@gmail.com</p></div>
+            <span class="contact-arrow">&rarr;</span>
+          </a>
+          <a href="https://wa.me/660800106530" target="_blank" rel="noopener noreferrer" class="contact-card">
+            <div class="contact-icon">&#x1F4F1;</div>
+            <div class="contact-info"><h3>WhatsApp</h3><p>+66 0800106530</p></div>
+            <span class="contact-arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- ===== VALIDASI FORM ===== -->
+        <div class="contact-form-wrap">
+          <h3 class="form-title">Kirim Pesan</h3>
+          <form id="contact-form" novalidate>
+            <div class="form-group">
+              <input type="text" id="form-nama" placeholder="Nama kamu" />
+              <span class="form-error" id="error-nama"></span>
+            </div>
+            <div class="form-group">
+              <input type="email" id="form-email" placeholder="Email kamu" />
+              <span class="form-error" id="error-email"></span>
+            </div>
+            <div class="form-group">
+              <textarea id="form-pesan" placeholder="Pesan kamu..." rows="4"></textarea>
+              <span class="form-error" id="error-pesan"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btn-submit">Kirim Pesan &#x2192;</button>
+            <p class="form-success" id="form-success"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER (Flexbox #3) ===== -->
+    <footer class="footer" id="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">Ainun<span class="dot">.</span></a>
+          <p>Membangun web, satu piksel demi satu piksel.</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="footer-copy">
+          <p>&copy; 2026 Ai Aminsen.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
